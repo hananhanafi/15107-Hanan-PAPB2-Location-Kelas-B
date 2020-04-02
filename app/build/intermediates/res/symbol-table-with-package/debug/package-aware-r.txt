@@ -900,7 +900,10 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string get_location
+string invalid_lat_long_used
+string no_address_found
 string search_menu_title
+string service_not_available
 string status_bar_notification_info_overflow
 string textview_hint
 style AlertDialog_AppCompat

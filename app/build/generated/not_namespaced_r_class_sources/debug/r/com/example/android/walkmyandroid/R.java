@@ -3050,9 +3050,12 @@ public final class R {
     public static final int common_signin_button_text=0x7f0c0030;
     public static final int common_signin_button_text_long=0x7f0c0031;
     public static final int get_location=0x7f0c0032;
-    public static final int search_menu_title=0x7f0c0033;
-    public static final int status_bar_notification_info_overflow=0x7f0c0034;
-    public static final int textview_hint=0x7f0c0035;
+    public static final int invalid_lat_long_used=0x7f0c0033;
+    public static final int no_address_found=0x7f0c0034;
+    public static final int search_menu_title=0x7f0c0035;
+    public static final int service_not_available=0x7f0c0036;
+    public static final int status_bar_notification_info_overflow=0x7f0c0037;
+    public static final int textview_hint=0x7f0c0038;
   }
   public static final class style {
     public static final int AlertDialog_AppCompat=0x7f0d0000;

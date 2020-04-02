@@ -6,43 +6,62 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class FetchAddressTask extends AsyncTask<Location,Void,String> {
+class FetchAddressTask extends AsyncTask<Location,Void,String> {
     private Context mContext;
     private OnTaskCompleted mListener;
-    FetchAddressTask(Context context, OnTaskCompleted listener){
-        mContext = context;
+
+
+    FetchAddressTask(Context applicationContext, OnTaskCompleted listener) {
+        mContext = applicationContext;
         mListener = listener;
     }
 
+
     @Override
     protected String doInBackground(Location... locations) {
-        Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(mContext,
+                Locale.getDefault());
+
         Location location = locations[0];
         List<Address> addresses = null;
         String resultMessage = "";
 
         try {
-            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLatitude(),1);
-        } catch (IOException e) {
-            e.printStackTrace();
+            addresses = geocoder.getFromLocation(
+                    location.getLatitude(),
+                    location.getLongitude(),
+                    1);
+        } catch (IOException ioException) {
+            resultMessage = mContext.getString(R.string.service_not_available);
         }
 
-        if (addresses==null||addresses.size()==0){
-            resultMessage = "No address found";
-        }else{
-            Address address = addresses.get(0);
-            ArrayList<String> addressPart = new ArrayList<>();
-            for (int i=0;i<=address.getMaxAddressLineIndex();i++){
-                addressPart.add(address.getAddressLine(i));
+        // If no addresses found, print an error message.
+        if (addresses == null || addresses.size() == 0) {
+            if (resultMessage.isEmpty()) {
+                resultMessage = mContext.getString(R.string.no_address_found);
             }
-            resultMessage = TextUtils.join("\n",addressPart);
+        } else {
+            // If an address is found, read it into resultMessage
+            Address address = addresses.get(0);
+            ArrayList<String> addressParts = new ArrayList<>();
+
+            // Fetch the address lines using getAddressLine,
+            // join them, and send them to the thread
+            for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                addressParts.add(address.getAddressLine(i));
+            }
+
+            resultMessage = TextUtils.join(
+                    "\n",
+                    addressParts);
+
         }
+
         return resultMessage;
     }
 

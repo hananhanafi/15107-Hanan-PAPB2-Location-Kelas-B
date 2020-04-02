@@ -15,9 +15,11 @@
 -->
 <resources>
     <string name="app_name">Walk My Android</string>
-    <string name="get_location">Get Location</string>
+    <string name="get_location">Start Tracking Location</string>
     <string name="android_image">Android Image</string>
-    <string name="textview_hint">Press the button to get the last known
-        location
+    <string name="textview_hint">Press the button to start tracking your location
     </string>
+    <string name="service_not_available">Service not available</string>
+    <string name="invalid_lat_long_used">Invalid lat long used</string>
+    <string name="no_address_found">No address found</string>
 </resources>
